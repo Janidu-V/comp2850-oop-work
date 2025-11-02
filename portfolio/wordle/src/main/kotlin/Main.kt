@@ -1,4 +1,4 @@
-const val MAX_ATTEMPTS = 10
+const val MAX_ATTEMPTS = 6
 
 fun main() {
     val wordList = readWordList("data/words.txt")
@@ -10,7 +10,7 @@ fun main() {
         val validList = evaluateGuess(guess, targetWord)
         displayGuess(guess, validList)
 
-        if (validList == listOf(1, 1, 1, 1, 1)) {
+        if (validList == listOf(2, 2, 2, 2, 2)) {
             println("You have succesfully guessed the correct word!")
             return
         }

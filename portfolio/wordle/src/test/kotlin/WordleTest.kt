@@ -45,13 +45,23 @@ class WordleTest : StringSpec({
     }
 
     // Testing evaluateGuess
-    "Incorrect guesses" {
-        withClue("guess='HELLO', target='WORRY'") { evaluateGuess("HELLO", "WORRY") shouldBe listOf(0, 0, 0, 0, 0) }
-        withClue("guess='sight', target='FIGHT'") { evaluateGuess("SIGHT", "FIGHT") shouldBe listOf(0, 1, 1, 1, 1) }
+    "Guesses with no correct letters" {
+        withClue("guess='HELLO', target='CURRY'") { evaluateGuess("HELLO", "CURRY") shouldBe listOf(0, 0, 0, 0, 0) }
+        withClue("guess='world', target='FIGHT'") { evaluateGuess("world", "FIGHT") shouldBe listOf(0, 0, 0, 0, 0) }
+    }
+
+    "Guesses with some correct letters but in the wrong position" {
+        withClue("guess='Hello', target='BLOWS'") { evaluateGuess("Hello", "BLOWS") shouldBe listOf(0, 0, 1, 1, 1) }
+        withClue("guess='alert', target='LATER'") { evaluateGuess("alert", "LATER") shouldBe listOf(1, 1, 1, 1, 1) }
+    }
+
+    "Guesses with mixed correct letters in the right position, in the wrong position and incorrect letters" {
+        withClue("guess='HELLO', target='WORLD'") { evaluateGuess("HELLO", "WORLD") shouldBe listOf(0, 0, 1, 2, 1) }
+        withClue("guess='funny', target='BUFFY'") { evaluateGuess("funny", "BUFFY") shouldBe listOf(1, 2, 0, 0, 2) }
     }
 
     "Correct guesses" {
-        withClue("guess='HELLO', target='HELLO'") { evaluateGuess("HELLO", "HELLO") shouldBe listOf(1, 1, 1, 1, 1) }
-        withClue("guess='world', target='WORLD'") { evaluateGuess("world", "WORLD") shouldBe listOf(1, 1, 1, 1, 1) }
+        withClue("guess='HELLO', target='HELLO'") { evaluateGuess("HELLO", "HELLO") shouldBe listOf(2, 2, 2, 2, 2) }
+        withClue("guess='world', target='WORLD'") { evaluateGuess("world", "WORLD") shouldBe listOf(2, 2, 2, 2, 2) }
     }
 })

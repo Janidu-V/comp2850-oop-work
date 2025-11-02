@@ -2,6 +2,9 @@
 import java.io.File
 
 const val MAX_LENGTH = 5
+const val YELLOW = "\u001b[33m"
+const val GREEN = "\u001b[32m"
+const val DEFAULT = "\u001b[0m"
 
 fun isValid(word: String): Boolean {
     var result = true
@@ -36,6 +39,8 @@ fun evaluateGuess(guess: String, target: String): List<Int> {
     val validList = mutableListOf(0, 0, 0, 0, 0)
     for (i in 0..(MAX_LENGTH - 1)) {
         if (guess[i].uppercase() == target[i].uppercase()) {
+            validList.set(i, 2)
+        } else if (guess[i].uppercase() in target.uppercase()) {
             validList.set(i, 1)
         }
     }
@@ -46,12 +51,16 @@ fun evaluateGuess(guess: String, target: String): List<Int> {
 fun displayGuess(guess: String, matches: List<Int>) {
     var output = ""
     for (i in 0..(MAX_LENGTH - 1)) {
-        if (matches[i] == 1) {
-            output += "${guess[i]} "
+        if (matches[i] == 2) {
+            output += GREEN + "${guess[i]}"
+        } else if (matches[i] == 1) {
+            output += YELLOW + "${guess[i]}"
         } else {
-            output += "? "
+            output += DEFAULT + "${guess[i]}"
         }
     }
 
-    println(output)
+
+
+    println(output + DEFAULT)
 }
