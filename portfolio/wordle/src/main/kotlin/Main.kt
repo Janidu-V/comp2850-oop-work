@@ -20,5 +20,5 @@ fun main() {
         }
     }
 
-    println("You have failed to guess the word within 10 guesses. Correct word was $targetWord")
+    println("You have failed to guess the word within 6 guesses. Correct word was $targetWord")
 }

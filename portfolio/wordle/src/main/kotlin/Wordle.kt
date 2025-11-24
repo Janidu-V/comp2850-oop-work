@@ -60,7 +60,5 @@ fun displayGuess(guess: String, matches: List<Int>) {
         }
     }
 
-
-
     println(output + DEFAULT)
 }
